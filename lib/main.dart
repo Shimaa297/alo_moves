@@ -1,6 +1,8 @@
 import 'package:alo_moves/core/services/services_locator.dart';
+import 'package:alo_moves/moduls/training_series/controller/bloc/training_series_bloc.dart';
 import 'package:alo_moves/moduls/training_series/screens/challenge_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() {
@@ -20,17 +22,25 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     ServiceLocator().init();
   }
+
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       builder: (_, __) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            primarySwatch: Colors.pink,
+        return MultiBlocProvider(
+          providers: <BlocProvider<dynamic>>[
+            BlocProvider<TrainingSeriesBloc>(
+          create: (_) => sl<TrainingSeriesBloc>(),
+        ),
+          ],
+          child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              primarySwatch: Colors.pink,
+            ),
+            home: const ChallengeView(),
           ),
-          home: const ChallengeView(),
         );
       },
     );

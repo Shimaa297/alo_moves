@@ -32,7 +32,6 @@ class _ChallengeViewState extends State<ChallengeView> {
         // leading: const ArrowBackShared()
       ),
       body: BlocConsumer<TrainingSeriesBloc, TrainingSeriesState>(
-        bloc: sl<TrainingSeriesBloc>(),
         listener: (context, TrainingSeriesState state) {
           if (state.seriesState == RequestState.error) {
             print(state.message);
